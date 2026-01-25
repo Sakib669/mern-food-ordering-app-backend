@@ -4,7 +4,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 import myUserRoute from "./routes/MyUserRoute.js";
 import { v2 as cloudinary } from "cloudinary";
-import MyRestaurantRoute from "./routes/MyRestaurantRoute.js"
+import MyRestaurantRoute from "./routes/MyRestaurantRoute.js";
+import restaurantRoute from "./routes/RestaurantRoute.js";
 
 mongoose
   .connect(process.env.MONGODB_CONNECTION_STRING as string)
@@ -25,9 +26,9 @@ app.get("/health", async (req: Request, res: Response) => {
   res.send({ message: "health OK!" });
 });
 
-// /api/my/user
 app.use("/api/my/user", myUserRoute);
-app.use("/api/my/restaurant", MyRestaurantRoute)
+app.use("/api/my/restaurant", MyRestaurantRoute);
+app.use("/api/restaurant", restaurantRoute);
 
 app.get("/test", async (req: Request, res: Response) => {
   res.json({ message: "sogir uddin 220" });
